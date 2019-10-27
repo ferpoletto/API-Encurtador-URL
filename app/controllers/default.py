@@ -1,7 +1,10 @@
 from http import HTTPStatus
-from flask import Flask, request, jsonify, redirect
-from app.controllers.utils import Utils
+
+from flask import request, jsonify
+from werkzeug.utils import redirect
+
 from app.controllers.links import Links
+from app.controllers.utils import Utils
 from app.controllers.validacoes import Validacoes
 from app import app
 

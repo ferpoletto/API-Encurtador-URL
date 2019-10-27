@@ -1,9 +1,8 @@
 import random
 import string
 
-from app.controllers.utils import Utils
-from app.models.bd import Connection
 from app.controllers.validacoes import Validacoes
+from app.models.bd import Connection
 
 
 class Links:
