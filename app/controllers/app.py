@@ -6,8 +6,11 @@ from werkzeug.utils import redirect
 from app.controllers.links import Links
 from app.controllers.utils import Utils
 from app.controllers.validacoes import Validacoes
-from app import app
 from app.controllers.users import *
+
+from flask import Flask
+
+app = Flask(__name__)
 
 
 @app.route("/users/<userid>/urls", methods=["POST"])

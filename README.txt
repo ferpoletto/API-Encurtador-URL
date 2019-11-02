@@ -6,21 +6,7 @@ BANCO DE DADOS
 4 - psql
 5 - ALTER USER postgres WITH PASSWORD 'postgres';
 
-6 - CREATE TABLE links (
-id serial primary key,
-hits integer not null,
-url varchar(200) not null,
-shorturl varchar(100) not null unique
-);
-
-PROJETO:
-7 - Clonar o projeto;
-8 - Instalar os requirements.txt
-9 - Rodar o arquivo run.py
-
-
-
-CREATE TABLE users(
+6 -create table users(
 id_usuario serial primary key,
 usuario varchar(30) not null unique);
 
@@ -33,11 +19,14 @@ shorturl varchar(100) not null unique,
 usuario_id integer not null,
 FOREIGN KEY (usuario_id) REFERENCES users(id_usuario));
 
+PROJETO:
+7 - Clonar o projeto;
+8 - Instalar os requirements.txtd
+9 - Rodar o arquivo run.py
 
-select * from links L
-join users U
-on (L.usuario_id=U.id_usuario)
-where U.id_usuario = 3
+
+
+
 
 
 
