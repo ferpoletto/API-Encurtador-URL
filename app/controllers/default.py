@@ -7,6 +7,7 @@ from app.controllers.links import Links
 from app.controllers.utils import Utils
 from app.controllers.validacoes import Validacoes
 from app import app
+from app.controllers.users import *
 
 
 @app.route("/urls", methods=["POST"])
@@ -57,6 +58,7 @@ def stats():
     stats_geral = links.get_analitcs()
     return jsonify(stats_geral)
 
+
 @app.route("/urls/<id>", methods=["DELETE"])
 def delete(id):
     garanta = Validacoes()
@@ -66,3 +68,30 @@ def delete(id):
     link = Links()
     link.delete_url(id)
     return '', HTTPStatus.OK
+
+
+@app.route("/users", methods=["POST"])
+def cadastrarUser():
+    garanta = Validacoes()
+    data = request.json
+    if not garanta.user_existe(user=data['id']):
+        return '', HTTPStatus.CONFLICT
+
+    user = Users()
+    user.cadastrarUser(data['id'])
+    return jsonify(data), HTTPStatus.CREATED
+
+
+@app.route("/users/<id>", methods=['DELETE'])
+def deletarUser(id):
+    garanta = Validacoes()
+    if garanta.user_existe(id=id):
+        return 'User não existe', HTTPStatus.NOT_FOUND
+
+    user = Users()
+    user.deletarUser(id)
+    return '', HTTPStatus.OK
+
+
+
+

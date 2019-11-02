@@ -34,5 +34,16 @@ class Validacoes:
             return False
         return True
 
+    def user_existe(self, user=None, id=None):
+        self.bd = Connection()
+        if user:
+            self.query = ("SELECT count(usuario) FROM users where usuario = '{0}'".format(user))
+        if id:
+            self.query = ("SELECT count(id_usuario) FROM users where id_usuario = {0}".format(id))
+        print(self.query)
+        self.result = self.bd.findOne(self.query)
+        if self.result[0][0]:
+            return False
+        return True
 
 

@@ -20,3 +20,24 @@ PROJETO:
 
 
 
+CREATE TABLE users(
+id_usuario serial primary key,
+usuario varchar(30) not null unique);
+
+
+CREATE TABLE links(
+id serial primary key,
+hits integer not null,
+url varchar(100) not null,
+shorturl varchar(100) not null unique,
+usuario_id integer not null,
+FOREIGN KEY (usuario_id) REFERENCES users(id_usuario));
+
+
+select * from links L
+join users U
+on (L.usuario_id=U.id_usuario)
+where U.id_usuario = 3
+
+
+

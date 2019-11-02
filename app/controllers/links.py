@@ -18,7 +18,7 @@ class Links:
 
         try:
             self.bd = Connection()
-            self.query = ("INSERT INTO links (hits, url, shorturl) VALUES ({0}, '{1}', '{2}')".format(0 , URL, self.shorturl))
+            self.query = ("INSERT INTO links (hits, url, shorturl) VALUES ({0}, '{1}', '{2}')".format(0, URL, self.shorturl))
             self.bd.executarSQL(self.query)
             return self.bd.findOne("SELECT * FROM links WHERE shorturl = '{0}'".format(self.shorturl))
         except:

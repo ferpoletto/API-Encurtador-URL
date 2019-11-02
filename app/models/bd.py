@@ -6,7 +6,7 @@ class Connection():
         try:
             self.connection = psycopg2.connect(
                 user="postgres",
-                password="postgres",
+                password="ads",
                 host="127.0.0.1",
                 port="5432",
                 database="links")
