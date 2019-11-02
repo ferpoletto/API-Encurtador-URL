@@ -19,7 +19,6 @@ class Connection():
     def executarSQL(self, query):
         try:
             self.cursor.execute(query)
-
         except:
             print('Falha ao executarSQL')
 

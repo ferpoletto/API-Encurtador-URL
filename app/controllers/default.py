@@ -10,11 +10,17 @@ from app import app
 from app.controllers.users import *
 
 
-@app.route("/urls", methods=["POST"])
-def encurtarURL():
+@app.route("/users/<userid>/urls", methods=["POST"])
+def encurtarURL(userid):
     data = request.json
+
+    garanta = Validacoes()
+    if not garanta.user_existe(id=userid):
+        return 'Usuário não existe', HTTPStatus.NOT_FOUND
+
     short = Links()
-    data = short.cadastra_urls(data["URL"])
+    data = short.cadastra_urls(data["URL"], userid)
+
     utils = Utils()
     data = utils.gera_dict(data)
     return jsonify(data), HTTPStatus.CREATED
@@ -47,6 +53,7 @@ def stats_id(id):
     return jsonify(results)
 
 
+#Status gerais de todas URLs cadastradas no sistema.
 @app.route("/stats", methods=['GET'])
 def stats():
     garanta = Validacoes()
@@ -59,6 +66,25 @@ def stats():
     return jsonify(stats_geral)
 
 
+#Status das URLS cadastradas por usuário,
+#Routa considera o id(primary key) do usuário salvo no banco
+@app.route("/users/<userid>/stats", methods=["GET"])
+def getUserStats(userid):
+
+    garanta = Validacoes()
+    if not garanta.user_existe(id=userid):
+        return 'Usuário não existe', HTTPStatus.NOT_FOUND
+
+    if not garanta.existem_dados(userid):
+        return 'Não existem dados para esse usuário', HTTPStatus.NOT_FOUND
+
+
+    links = Links()
+    stats_user = links.get_analitcs(id=userid)
+    return jsonify(stats_user)
+
+
+#Deleta uma URL cadastrada
 @app.route("/urls/<id>", methods=["DELETE"])
 def delete(id):
     garanta = Validacoes()
@@ -70,28 +96,34 @@ def delete(id):
     return '', HTTPStatus.OK
 
 
+#Cadastra um usuário na tabela users
 @app.route("/users", methods=["POST"])
 def cadastrarUser():
-    garanta = Validacoes()
     data = request.json
-    if not garanta.user_existe(user=data['id']):
+
+    garanta = Validacoes()
+    if garanta.user_existe(user=data['id']):
         return '', HTTPStatus.CONFLICT
 
     user = Users()
     user.cadastrarUser(data['id'])
-    return jsonify(data), HTTPStatus.CREATED
+    id_pk = user.get_usuario_id(data['id'])
+    results = {'id_PK': id_pk[0][0], 'usuario': data['id']}
+    return jsonify(results), HTTPStatus.CREATED
 
 
+#Deleta um usuário e suas URLS cadastradas
 @app.route("/users/<id>", methods=['DELETE'])
 def deletarUser(id):
     garanta = Validacoes()
-    if garanta.user_existe(id=id):
+    if not garanta.user_existe(id=id):
         return 'User não existe', HTTPStatus.NOT_FOUND
+
+    links = Links()
+    if garanta.existe_url_do_usuario(id):
+        links.delete_url(id_usuario=id)
 
     user = Users()
     user.deletarUser(id)
+
     return '', HTTPStatus.OK
-
-
-
-
