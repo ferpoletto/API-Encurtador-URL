@@ -41,5 +41,5 @@ class Connection():
                             'shorturl varchar(100) not null unique,'
                             'usuario_id integer not null,'
                             'FOREIGN KEY (usuario_id) '
-                            'REFERENCES users(id_usuario)')
-        return print('Tabelas geradas')
+                            'REFERENCES users(id_usuario))')
+
