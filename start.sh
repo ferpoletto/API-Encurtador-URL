@@ -8,4 +8,8 @@ source venv/bin/activate
 pip install -r requirements.txt
 
 
+#START NO BANCO DE DADOS
+sudo -u postgres start
+
+#START NA APLICAÇÃO
 python3 run.py

@@ -18,3 +18,4 @@ sudo -u postgres psql -d postgres -c "CREATE TABLE links (id serial primary key,
 
 
 
+
