@@ -35,7 +35,7 @@ class Validacoes:
             self.query = "SELECT * FROM links"
 
         self.results = self.bd.findOne(self.query)
-        if self.results[0][0] > 1:
+        if self.results and self.results[0][0] !=0:
             return True
         return False
 
