@@ -18,35 +18,3 @@ sudo -u postgres psql -d postgres -c "CREATE TABLE links (id serial primary key,
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#CLONANDO O REPOSITORIO
-cd /Documentos
-git clone https://github.com/ferpoletto/Encurtador-URLS-Flask-Postgres.git
-cd Encurtador-URLS-Flask-Postgres
-
-
-#INSTALANDO O PIP E VIRTUALENV
-apt-get install python3-pip
-sudo apt-get install virtualenv
-virtualenv --python=python3 venv
-source venv/bin/activate
-pip install -r requirements.txt
-
-
-
-
