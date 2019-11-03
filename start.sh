@@ -9,7 +9,7 @@ pip install -r requirements.txt
 
 
 #START NO BANCO DE DADOS
-sudo -u postgres start
+psql -h 127.0.0.1 -U postgres -d links
 
 #START NA APLICAÇÃO
 python3 run.py

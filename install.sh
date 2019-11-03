@@ -3,7 +3,6 @@
 #INSTALANDO O GIT
 sudo apt-get update
 sudo apt-get install git
-#sudo apt-get upgrade python3
 
 #INSTALANDO DEPENDENCIAS
 sudo apt-get install postgresql postgresql-contrib
