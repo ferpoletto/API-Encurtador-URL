@@ -29,3 +29,17 @@ class Connection():
             return result
         except:
             return ('Falha ao executarSQLRetorno')
+
+    def executor(self):
+        self.cursor.execute('CREATE TABLE IF NOT EXISTS users '
+                            '(id_usuario serial primary key,'
+                            'usuario varchar(30) not null unique)')
+        self.cursor.execute('CREATE TABLE IF NOT EXISTS links '
+                            '(id serial primary key,'
+                            'hits integer not null,'
+                            'url varchar(100) not null,'
+                            'shorturl varchar(100) not null unique,'
+                            'usuario_id integer not null,'
+                            'FOREIGN KEY (usuario_id) '
+                            'REFERENCES users(id_usuario)')
+        return print('Tabelas geradas')

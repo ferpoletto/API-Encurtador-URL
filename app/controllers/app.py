@@ -7,11 +7,14 @@ from app.controllers.links import Links
 from app.controllers.utils import Utils
 from app.controllers.validacoes import Validacoes
 from app.controllers.users import *
+from app.models.bd import *
 
 from flask import Flask
 
 app = Flask(__name__)
 
+# executor = Connection()
+# executor.executor()
 
 @app.route("/users/<userid>/urls", methods=["POST"])
 def encurtarURL(userid):
