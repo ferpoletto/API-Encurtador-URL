@@ -31,7 +31,7 @@ Quando o cadastro ocorre com sucesso, no response haverá o id do novo usuário 
 EXCLUIR USUÁRIO:
 DELETE - 127.0.0.1:500/users/<id>
 
-Ao informar um id que existe no banco, a aplicação retornará um status 200 - OK. Caso não exista, retorna um 404 - Not found.
+Ao informar um id que existe no banco, a aplicação retornará um status 200 - OK, excluindo o usuário e todas as URL cadastradas no banco na tabela links. Caso não exista, retorna um 404 - Not found.
 
 
 
